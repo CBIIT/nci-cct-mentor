@@ -1,5 +1,48 @@
 /* Custom CSS */
 
+h1.page-title
+    {display: none;}
+    
+nav.breadcrumb
+     {display: none;}
+
+
+.calloutbox {
+    background-color: #f6f6f6;
+    border: 1px solid #ddd;
+    display: block;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+     
+/* Flexbox Code */
+.flex-container > div > ul > li  {
+  list-style-type: none;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  background-color: white;
+}
+
+.flex-container > div {
+  background-color: lightgrey;
+  width: 300px;
+  padding:5px;
+  margin: 10px;
+  border: 1px solid black;
+}
+
+.last-five-years {
+  font-weight: bold;
+}
+
+/* End Flexbox Code */
+
+
 /* to render admin toolbar when header tag is active */
 #admin-menu {
     z-index: 10000;
