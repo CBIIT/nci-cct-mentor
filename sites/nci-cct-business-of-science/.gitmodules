@@ -1,0 +1,4 @@
+[submodule "themes/drupal-multipurpose-theme"]
+	path = themes/drupal-multipurpose-theme
+	url = https://github.com/CBIIT/drupal-multipurpose-theme.git
+	branch = nci-cct-business-of-science
