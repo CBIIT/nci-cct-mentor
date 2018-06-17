@@ -22,7 +22,6 @@ jQuery( function($) {
 			$.sidr('close', 'sidr-main');
 			return false;
 		});
-		alert("doc ready");
 
 	}); // End doc ready
 
@@ -42,7 +41,6 @@ jQuery( function($) {
 			nextText: '<span class="fa fa-caret-right"></span>',
 			controlsContainer: ".flexslider-container"
 		});
-	alert("Page Slider");		
 	}); // End on window load
 	
 });

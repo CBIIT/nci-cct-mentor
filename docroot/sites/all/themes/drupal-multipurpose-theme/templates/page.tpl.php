@@ -1,4 +1,4 @@
-<?php
+i<?php
 /**
  * @file
  * Default theme implementation to display a single Drupal page.
@@ -64,6 +64,19 @@
  * @see template_process()
  */
 ?>
+<?php
+  //Determine which WEBSITE user is on from the url alias.
+  // If url is /nciconnect/* then user is on the nciconnect site
+  // else on the Mentor site.
+  $site = "";
+  $path = current_path();
+  $path_alias = drupal_lookup_path('alias',$path);
+  if(substr($path_alias, 0 , 10) === "nciconnect") {
+    $site = "nciconnect";
+  } else {
+    $site = "mentor";
+  } 
+?>
 
 <div id="wrap" class="clr container">
   <div id="header-wrap" class="clr fixed-header">
@@ -71,12 +84,15 @@
       <div id="logo" class="clr">
 	  
         <?php if (theme_get_setting('image_logo','multipurpose')): ?>
-        <?php if ($logo): ?><div id="site-logo"><a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+        <?php if ($logo): ?><div id="site-logo"><a href="<?php print ($site === "mentor") ? $front_page : "/nciconnect" ?>" title="<?php print t('Home'); ?>">
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
         </a></div><?php endif; ?>
         <?php else: ?>
         <h2 id="site-name">
+          <!--
           <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
+          -->
+          <a href="<?php print ($site === "mentor") ? $front_page : "nciconnect" ?>" title="<?php print ('Home2'); ?>"><?php print $site_name; ?></a>
         </h2>
         <?php if ($site_slogan): ?><div id="site-slogan"><?php print $site_slogan; ?></div><?php endif; ?>
         <?php endif; ?>
@@ -136,9 +152,33 @@
       <div id="main-menu" class="menu-main-container">
         <?php 
           
-          $main_menu_tree = menu_tree(variable_get('menu_main_links_source', 'main-menu'));
-          print drupal_render($main_menu_tree);
-          
+          if($site === "nciconnect") {
+            
+            print '<ul class="menu dropdown-menu sf-menu sf-js-enabled">
+            <li class="first leaf"><a href="/nciconnect" title="">Home</a></li>
+<li class="leaf"><a href="/nciconnect/registration" title="">Registration</a></li>
+<li class="leaf"><a href="/nciconnect/agenda" title="">Agenda</a></li>
+<li class="leaf"><a href="/nciconnect/call-for-proposals" title="">Proposals</a></li>
+<li class="leaf"><a href="/nciconnect/travel" title="">Travel</a></li>
+<li class="leaf"><a href="/nciconnect/lodging" title="">Lodging</a></li>
+<li class="leaf"><a href="/nciconnect/nih-campus-access" title="">Campus Access</a></li>
+<li class="leaf"><a href="/nciconnect/shuttles" title="">Shuttles</a></li>
+<li class="last leaf"><a href="/nciconnect/directions" title="">Directions</a></li>
+</ul>';
+/*
+            $main_menu_tree = menu_tree(variable_get('menu_secondary_links_source', 'main-nav-nci-connect'));
+            print drupal_render($main_menu_tree);
+            drupal_set_message("HTML of Mentor MENU");
+            drupal_set_message(print_r($main_menu_tree, true));
+            drupal_set_message(print_r(drupal_render($main_menu_tree), true));
+*/
+          } else {
+            $main_menu_tree = menu_tree(variable_get('menu_main_links_source', 'main-menu'));
+            print drupal_render($main_menu_tree);
+            //drupal_set_message("HTML of Mentor MENU");
+            //drupal_set_message(print_r($main_menu_tree, true));
+            //drupal_set_message(print_r(drupal_render($main_menu_tree), true));
+          }
         ?>
       </div>
     </nav>
@@ -246,3 +286,4 @@
 
 
 </div>
+
